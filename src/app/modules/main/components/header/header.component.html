@@ -14,7 +14,7 @@
       <h3 (click)="updateProfile()" class="profile-img user-name-circle text-capitalize" *ngIf="!profileImage">{{userName.substr(0,1)}}</h3>
       <button *ngIf="!isMobile" class="btn btn-primary" (click)="logOut()">Logout</button>
       <ng-container *ngIf="isMobile">
-      <img  (click)="openOption()" src="../../../assets/svgs/option.svg" class="global-icon"/>
+      <div class="global-icon" (click)="openOption()"><mat-icon>more_vert</mat-icon></div>
       <div *ngIf="showOption" class="option-div">
         <ul class="global-list">
           <li (click)="logOut()">Logout</li>

@@ -93,7 +93,7 @@
 
       <div class="image-viewers">
         <div id="image-preview" (click)="openFile()">
-          <img id="preview-image" [src]="previewImageUrl || user.image || '../../assets/images/profile-dummy.jpg'" alt="Preview" />
+          <img id="preview-image" [src]="previewImageUrl || user.image" alt="Preview" />
         </div>
         
         <input id="image-input" type="file" style="display: none;" (change)="handleImageUpload($event)" />
