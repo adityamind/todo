@@ -1,0 +1,140 @@
+<div style="display: flex" class="main-container" (click)="closeEditDeletePopup($event)" #myElement >
+  <div class="main-drawer" *ngIf="isValid">
+    <ng-container *ngFor="let list of weeks ; let i=index">
+    <div class="example-container" *ngIf="!list.isDeleted" >
+      <div class="header">
+        <input class="card-name" [id]="'card'+(i)" [readOnly]="!isEditable[i]" [value]="list.name" />
+        <div class="icons">
+          <button type="button" *ngIf="!isEditable[i]" (click)="enableEdit(i,list.id)"><mat-icon>edit</mat-icon></button>
+          <button type="button" *ngIf="isEditable[i]" (click)="enableEdit(i,list.id)"><mat-icon>save</mat-icon></button>
+          <button type="button" (click)="deleteList(list.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div cdkDropList id="{{ list.id }}" [cdkDropListData]="list.list"cdkDrag [cdkDropListConnectedTo]="connectedTo"
+        class="example-list" (cdkDropListDropped)="drop($event)" >
+        <ng-container *ngFor="let item of list.list; let j=index">
+        <div class="example-box" *ngIf="!item.isDeleted"  cdkDrag>
+          <div class="move-logo"><mat-icon>drag_indicator</mat-icon></div>
+          <div class="main-title" (click)="openDetails(item.selfId,list.id)">{{ item.name }}</div>
+          <div class="option" *ngIf="showEditDeleteOption[i][j]">
+            <ul class="global-list" (click)="openEditDeletePopup(i,j)">
+              <li class="edit" (click)="openDetails(item.selfId,list.id)">Edit</li>
+              <li class="delete" (click)="updateTask(item.selfId,list.id,1)">Delete</li>
+            </ul>
+            <span class="triangle-option"></span>
+          </div>
+          <div class="options" (click)="openEditDeleteOption(i,j)"><mat-icon>more_vert</mat-icon></div>
+
+        </div>
+      </ng-container>
+      </div>
+      <div class="add-task">
+        <button (click)="addNewTask(list.id)">
+          <mat-icon>add</mat-icon>Add Task
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  </div>
+  <mat-card>
+    <form action="" class="card-form" [formGroup]="createNew" (ngSubmit)="addNew(); createNew.reset()">
+      <div class="new-card-body">
+        <input type="text" class="new-card-input" placeholder="Card Title" formControlName="title" />
+      </div>
+      <div class="create">
+        <button type="submit" class="btn btn-success" [disabled]="createNew.invalid">
+          +
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+
+
+
+<!--   -->
+<app-popup class="card-detail-popup" *ngIf="showPopup" [modalType]="modalType.SMALL" header="{{ 'Card Details' }}" [showCross]="true" (onClose)="hideModal()"
+  appKeyboardEvent>
+  <div body>
+    <form [formGroup]="addTaskForm" (ngSubmit)="addTaskNow();addTaskForm.reset()">
+      <div class="col-12 form-group" style="display: none;">
+        <label style="color: #000">
+          <ng-container>{{ "Card Id: " }}</ng-container>
+
+        </label>
+        <input formControlName="cardId" readonly />
+      </div>
+
+      <div class="col-12 form-group">
+        <label style="color: #000">
+          <ng-container>{{ "Task Name: " }}</ng-container>
+
+        </label>
+        <input formControlName="cardTitleName" placeholder="{{ 'Enter Task Name' }}" maxlength="90" />
+      </div>
+
+      <div class="d-flex justify-content-center btn-section">
+        <button class="btn save-btn" type="submit">
+          <ng-container>{{ "Submit" }}</ng-container>
+        </button>
+      </div>
+    </form>
+
+  </div>
+</app-popup>
+
+<app-popup class="card-detail-popup" *ngIf="drawerService._showProfileUpdate | async" [modalType]="modalType.MEDIUM" header="{{ 'Profile' }}" [showCross]="true" (onClose)="hideUpdate()"
+  appKeyboardEvent>
+  <div body>
+    <div>
+
+      <div class="image-viewers">
+        <div id="image-preview" (click)="openFile()">
+          <img id="preview-image" [src]="previewImageUrl || user.image || '../../assets/images/profile-dummy.jpg'" alt="Preview" />
+        </div>
+        
+        <input id="image-input" type="file" style="display: none;" (change)="handleImageUpload($event)" />
+        </div>
+        <div class="user-detail">
+      <div class="user-info">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" [(ngModel)]="user.first_name">
+      </div>
+    
+      <div class="user-info">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" [(ngModel)]="user.last_name">
+      </div>
+    
+      <div class="user-info">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="user.email" readonly>
+      </div>
+    
+      <div class="user-info">
+        <label for="mobile">Mobile:</label>
+        <input type="tel" id="mobile" [(ngModel)]="user.mobile">
+      </div>
+    
+    </div>
+  </div>
+  <button class="btn btn-success update-task-btn" (click)="saveProfile()">Update</button>
+
+  </div>
+</app-popup>
+
+
+
+<app-popup class="card-detail-popup" *ngIf="showDetailPage" [modalType]="modalType.LARGE" header="{{ taskNameHeader }}" [showCross]="true" (onClose)="hideDetails()"
+  appKeyboardEvent>
+  <div body class="main-body">
+    <div class="card-area-div">
+    <textarea name="cardDetail" (click)="enableRead()"  class="card-detail-input" [(ngModel)]="taskDetails" [readOnly]="isReadOnly"></textarea>
+    
+  </div>
+  <button class="btn btn-success update-task-btn" (click)="updateTask(updatedTaskId,updatedParentId)" [disabled]="!isButtonEnable">Save</button>
+  </div>
+</app-popup>

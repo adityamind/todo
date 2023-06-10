@@ -1,0 +1,23 @@
+.error-link {
+    font-size: 20px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+  }
+
+  .error-link:hover {
+    color: #0056b3;
+  }
+
+  .verify{
+    width: 314px;
+    margin: 62px auto;
+    padding: 20px;
+
+    
+  }
+
+  .para {
+    margin-bottom: 41px;
+}

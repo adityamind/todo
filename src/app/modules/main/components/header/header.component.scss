@@ -1,0 +1,115 @@
+
+.header {
+    background-color: #f8f9fa;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .profile-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .profile-name {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 20px;
+ 
+  }
+  
+  .nav-options {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-options a {
+    margin-left: 10px;
+  }
+  
+  @media (max-width: 576px) {
+    .profile-img {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .profile-name {
+      display: none;
+    }
+  }
+  .user-name-circle {
+      border: 1px solid black;
+      border-radius: 40px;
+      text-align: center;
+      font-size: 32px;
+      margin: auto 2px;
+  }
+  
+  .option-div{
+    background-color: #d7d7f0;
+      width: fit-content;
+      position: absolute;
+      top: 43px;
+      right: 12px;
+      padding: 5px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+  }
+  
+  .active{
+    background-color: #337dc8f0;
+      color: white;
+      padding: 3px;
+      border-radius: 5px;
+      text-align: center;
+      padding-bottom: 6px;
+  }
+  a:hover{
+    text-decoration: none;
+  }
+  
+  .header{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+
+  .global-icon{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .global-list{
+    margin: 0;
+    padding: 2px;
+    list-style: none;
+  }
+
+  .global-list li{
+    cursor: pointer;
+  }
+  .global-list li:hover{
+    color: blue;
+  }
+
+  .triangle-option {
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 7px solid #d7d7f0;
+    position: absolute;
+    top: -5px;
+    right: 3px;
+    rotate: -2deg;
+  }

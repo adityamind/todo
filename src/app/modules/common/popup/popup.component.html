@@ -1,0 +1,30 @@
+
+<!-- The Modal -->
+<div class="modal fade show"  style="overflow:auto;display: block"  appKeyboardEvent (esc)="onCloseClick($event)" [isEnabled]="true">
+    <div class="modal-dialog modal-dialog-centered" [ngClass]="modalType">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+           <h4 class="modal-title">{{header}}</h4>
+           <ng-content select="[header]"></ng-content>
+           <button type="button" class="close btn-close" data-dismiss="modal" *ngIf="showCross" (click)="onCloseClick($event)"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+           <ng-content select="[body]"></ng-content>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+           <ng-content select="[footer]"></ng-content>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="modal-backdrop fade show"></div>
+  

@@ -1,0 +1,7 @@
+<ng-container *ngIf="dataService._showLoader | async">
+    <div class="spinner-container">
+        <div class="loading-spinner">
+        </div>
+      </div>
+    </ng-container>
+    <router-outlet></router-outlet>

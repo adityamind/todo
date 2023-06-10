@@ -1,0 +1,26 @@
+
+<header class="header" (window:resize)="onResize($event)">
+    <div class="profile-info">
+      <!-- <span>
+        <a routerLink="home" [routerLinkActive]="['active']" class="mr-3">Home</a>
+      </span>
+      <span>
+        <a routerLink="create" [routerLinkActive]="['active']" class="mr-3">Create Resume</a>
+      </span> -->
+      <span class="profile-name text-capitalize">{{'Welcome ' + userName}}</span>
+    </div>
+    <div class="nav-options">
+      <img (click)="updateProfile()" class="profile-img" *ngIf="profileImage" src="{{profileImageAdd}}" alt="Profile Image">
+      <h3 (click)="updateProfile()" class="profile-img user-name-circle text-capitalize" *ngIf="!profileImage">{{userName.substr(0,1)}}</h3>
+      <button *ngIf="!isMobile" class="btn btn-primary" (click)="logOut()">Logout</button>
+      <ng-container *ngIf="isMobile">
+      <img  (click)="openOption()" src="../../../assets/svgs/option.svg" class="global-icon"/>
+      <div *ngIf="showOption" class="option-div">
+        <ul class="global-list">
+          <li (click)="logOut()">Logout</li>
+        </ul>
+        <span class="triangle-option"></span>
+      </div>
+    </ng-container>
+    </div>
+  </header>

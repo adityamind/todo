@@ -1,0 +1,42 @@
+
+<section class="">
+   
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center">
+  
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card">
+              <div class="card-body py-5 px-md-5">
+                <form (ngSubmit)="signup()" [formGroup]="signupForm">
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <input formControlName="username" type="email" id="email" class="form-control" />
+                    <label class="form-label" for="email">Email address</label>
+                  </div>
+  
+                  <!-- Password input -->
+                  <div class="form-outline mb-4">
+                    <input formControlName="password" type="password" id="pass" class="form-control" />
+                    <label class="form-label" for="pass">Password</label>
+                  </div>
+  
+                 
+  
+                  <!-- Submit button -->
+                  <button type="submit" [disabled]="signupForm.invalid" class="btn btn-primary btn-block mb-4">
+                    Sign up
+                  </button>
+  
+                  <div class="text-center">
+                    <p>or already have an account:</p>
+                    <a routerLink="/user/signin">Login Now</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
