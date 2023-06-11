@@ -2,14 +2,12 @@
   <div class="main-drawer" *ngIf="isValid">
     <ng-container *ngFor="let list of weeks ; let i=index">
     <div class="example-container" *ngIf="!list.isDeleted" >
-      <div class="header">
+      <div class="header" (click)="optionHandler(i,list.id,$event)">
         <input class="card-name" [id]="'card'+(i)" [readOnly]="!isEditable[i]" [value]="list.name" />
         <div class="icons">
-          <button type="button" *ngIf="!isEditable[i]" (click)="enableEdit(i,list.id)"><mat-icon>edit</mat-icon></button>
-          <button type="button" *ngIf="isEditable[i]" (click)="enableEdit(i,list.id)"><mat-icon>save</mat-icon></button>
-          <button type="button" (click)="deleteList(list.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
+          <button type="button" class="edit-btn" *ngIf="!isEditable[i]" ><mat-icon>edit</mat-icon></button>
+          <button type="button" class="save-btn" *ngIf="isEditable[i]" ><mat-icon>save</mat-icon></button>
+          <button type="button" class="delete-btn" ><mat-icon>delete</mat-icon></button>
         </div>
       </div>
 

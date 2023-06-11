@@ -57,7 +57,7 @@ export class CardDrawerComponent implements OnInit {
   }
 
 
-  saveProfile(){
+  async saveProfile(){
     let body ={
       first_name:this.user.first_name || "",
       last_name:this.user.last_name || "",
@@ -68,10 +68,10 @@ export class CardDrawerComponent implements OnInit {
       id:""
     };
     if(this.docId) {
-      this.drawerService.updateDetails(body,this.docId);
+      this.drawerService.updateDetails(body, this.docId);
     }
     else {
-      this.drawerService.addCard(body);
+      await this.drawerService.addCard(body);
     }
       this.listCard();
   }
@@ -169,7 +169,7 @@ export class CardDrawerComponent implements OnInit {
 
 
 
-  addNew() {
+  async addNew() {
     let name = this.title.value;
     let val = {
       id: 'card'+ new Date().getTime(),
@@ -194,7 +194,7 @@ export class CardDrawerComponent implements OnInit {
       id:""
     };
     if(!this.cardList.length){
-    this.drawerService.addCard(body);
+    await this.drawerService.addCard(body);
     }
     else{
       this.drawerService.updateDetails(body,this.docId);
@@ -367,15 +367,27 @@ deleteList(id: any){
   this.listCard();
 }
 
-enableEdit(id:number,listId:any) {
+optionHandler(id:number,listId:any,event:any){
+const input = event.target.parentElement as HTMLInputElement;
+if(input.classList.contains('edit-btn')) {
+  this.enableEdit(id,listId);
+}
+else if(input.classList.contains('save-btn')) {
+  let elem = input.parentElement?.parentElement?.childNodes[0] as HTMLInputElement;
+  this.enableEdit(id,listId,elem.value);
+}
+else if(input.classList.contains('delete-btn')) {
+  this.deleteList(listId);
+}
+}
+
+enableEdit(id:number,listId:any,val?:any) {
   if(this.isEditable[id]==0) {
     this.isEditable[id]=1;
   } 
   else if(this.isEditable[id]==1) {
     this.isEditable[id]=0;
-    let val=`Value: ${'card'+id}`
-    console.log(val);
-    // this.editList(listId,val);
+    this.editList(listId,val);
   }
 }
 editList(id: any,val:any){
@@ -464,7 +476,9 @@ addTaskNow(){
     this.drawerService.updateDetails(body,this.docId);
  
   this.listCard();
-  this.showPopup=false;
+  setTimeout(()=>{
+    this.showPopup=false;
+  },1000);
 }
 
 updateTask(taskId:any,id:any,isDeleted?:number){
@@ -528,7 +542,10 @@ updateTask(taskId:any,id:any,isDeleted?:number){
     this.drawerService.updateDetails(body,this.docId);
  
   this.listCard();
-  this.drawerService.showLoader(false);
+  setTimeout(()=>{
+    this.drawerService.showLoader(false);
+
+  },1000);
 
 }
 
