@@ -1,5 +1,5 @@
 #deployed on Netlify
-https://6485b7c42fa55b0b5825b971--calm-chimera-961582.netlify.app/
+https://adityamandal.netlify.app/
 # todo
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.5.
